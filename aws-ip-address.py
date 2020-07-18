@@ -3,9 +3,10 @@ import json
 
 from ipaddress import ip_network
 
-#TODO Utilize Pandas
+# TODO Utilize Pandas
 
 # Obtain the AWS IP address range from https://ip-ranges.amazonaws.com/ip-ranges.json
+
 
 def download_addresses(url="https://ip-ranges.amazonaws.com/ip-ranges.json"):
 
@@ -13,7 +14,9 @@ def download_addresses(url="https://ip-ranges.amazonaws.com/ip-ranges.json"):
 
     return ip_ranges_json
 
+
 # Extract the CIDRs from the JSON file.
+
 
 def extract_ipv4(ip_ranges_json):
 
@@ -23,6 +26,7 @@ def extract_ipv4(ip_ranges_json):
 
     return ipv4prefixes
 
+
 def extract_ipv6(ip_ranges_json):
 
     ipv6prefixes = list()
@@ -30,6 +34,7 @@ def extract_ipv6(ip_ranges_json):
         ipv6prefixes.append((ip_network(prefix["ipv6_prefix"]).exploded))
 
     return ipv6prefixes
+
 
 def reduce_cidr(prefixes):
 
@@ -76,7 +81,9 @@ def reduce_cidr(prefixes):
 
     return networks
 
+
 #  Return a list of CIDRs
+
 
 def print_cidr(networks):
 
