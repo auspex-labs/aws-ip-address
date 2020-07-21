@@ -94,16 +94,47 @@ def print_cidr(networks):
     return
 
 
+def list_cidr(networks):
+
+    result = []
+
+    for mask in sorted(networks):
+        for cidr in sorted(networks[mask]):
+            result.append(ip_network(cidr))
+
+    return result
+
+
+def write_cidr(networks):
+
+    with open("aws_networks.json", "w") as open_file:
+        json.dump(networks, open_file, indent=4, sort_keys=True)
+
+    return
+
+
+print(".", end="")
+
 ip_ranges_json = download_addresses()
+
+print(".", end="")
 
 ipv4 = extract_ipv4(ip_ranges_json)
 
-ipv6 = extract_ipv6(ip_ranges_json)
+# ipv6 = extract_ipv6(ip_ranges_json)
+
+print(".", end="")
 
 ipv4 = reduce_cidr(ipv4)
 
-ipv6 = reduce_cidr(ipv6)
+# ipv6 = reduce_cidr(ipv6)
 
-print_cidr(ipv4)
+# print_cidr(ipv4)
 
-print_cidr(ipv6)
+# print_cidr(ipv6)
+
+print(list_cidr(ipv4))
+
+print(".", end="")
+
+# write_cidr(ipv4)
