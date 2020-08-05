@@ -29,6 +29,9 @@ def test_address(networks, ipaddress="54.240.236.94"):
 
     return result
 
+
+networks = list()
+
 networks = list_cidr(read_address())
 
 if test_address(networks):
